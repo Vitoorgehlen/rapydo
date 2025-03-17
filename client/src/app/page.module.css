@@ -1,22 +1,3 @@
-:root {
-  --cor--gelo: #efefef;
-
-  --cor--cinza-claro: #a5a5a5;
-  --cor--cinza: #2a2a2a;
-  --cor--cinza-escuro: #121212;
-
-  --cor--verde-claro: #b2f599;
-  --cor--verde: #78e45d;
-  --cor--verde-escuro: #4a9f38;
-
-  --cor--roxo-claro: #d966ff;
-  --cor--roxo: #7b0097;
-  --cor--roxo-escuro: #4d0061;
-
-  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
 .descricaoOla {
   display: flex;
   margin: 0 auto;
