@@ -1,0 +1,143 @@
+:root {
+  --cor--gelo: #efefef;
+
+  --cor--cinza-claro: #3e4651;
+  --cor--cinza: #1b1a1f;
+  --cor--cinza-escuro: #121212;
+
+  --cor--verde-claro: #b2f599;
+  --cor--verde: #78e45d;
+  --cor--verde-escuro: #4a9f38;
+
+  --cor--roxo-claro: #d966ff;
+  --cor--roxo: #7b0097;
+  --cor--roxo-escuro: #4d0061;
+
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.crud {
+  display: flex;
+  justify-content: space-between;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.addBtn {
+  width: 70px;
+  height: 80px;
+  margin: 0 auto;
+  text-align: center;
+}
+.addBtnTxt {
+  font-size: 1.8rem;
+  font-weight: 100;
+}
+
+.btnTagCat {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  gap: 10px;
+}
+
+.btnTag,
+.btnCat {
+  padding: 0;
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 100;
+  width: 100px;
+  height: 35px;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 700px;
+  font-family: var(--font);
+  font-size: 1.2rem;
+}
+
+.buttonsModal button {
+  background-color: var(--cor--cinza-claro);
+}
+
+.confirm:hover {
+  background-color: var(--cor--roxo);
+}
+
+.cancel:hover {
+  background-color: var(--cor--verde);
+}
+
+.listPosts {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 0 30px;
+  min-width: 80%;
+}
+
+.postsLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 700px;
+  margin: 15px 15px;
+  padding: 8px;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.postsLink:hover {
+  border: 2px solid var(--cor--verde);
+}
+
+.postsTitle {
+  font-family: var(--font);
+  font-size: 1.8rem;
+  font-weight: 350;
+  color: var(--cor--cinza-claro);
+}
+
+.icons {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.pencil {
+  color: var(--cor--cinza-claro);
+  margin-right: 15px;
+}
+
+.pencil:hover {
+  color: var(--cor--verde-claro);
+}
+
+.eraserBt {
+  background-color: transparent;
+  padding: 0;
+}
+
+.eraserBt:hover {
+  background-color: transparent;
+}
+
+.eraser {
+  color: var(--cor--cinza-claro);
+}
+
+.eraser:hover {
+  color: var(--cor--roxo-claro);
+}

@@ -1,0 +1,37 @@
+.editor-paragraph {
+  margin: 8px 0;
+}
+
+.editor-bold {
+  font-weight: bold;
+}
+
+.editor-italic {
+  font-style: italic;
+}
+
+/* Estilos para Código */
+.editor-code {
+  font-family: "Courier New", monospace;
+  background-color: #4d0061;
+  color: #efefef;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Tamanhos de fonte */
+.editor-large {
+  font-size: 24px;
+}
+
+.editor-small {
+  font-size: 14px;
+}
+
+.fs-5 {
+  font-size: 100px;
+} /* Ajuste conforme necessário */
+.fs-2 {
+  font-size: 12px;
+}

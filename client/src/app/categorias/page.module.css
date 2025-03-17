@@ -1,0 +1,320 @@
+:root {
+  --cor--gelo: #efefef;
+
+  --cor--cinza-claro: #a5a5a5;
+  --cor--cinza: #2a2a2a;
+  --cor--cinza-escuro: #121212;
+
+  --cor--verde-claro: #b2f599;
+  --cor--verde: #78e45d;
+  --cor--verde-escuro: #4a9f38;
+
+  --cor--roxo-claro: #d966ff;
+  --cor--roxo: #7b0097;
+  --cor--roxo-escuro: #4d0061;
+
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.boxPageTitle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.pageTitle {
+  font-family: var(--font);
+  font-size: 5rem;
+  font-weight: 100;
+}
+
+.boxBody {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.boxBodyLeft {
+  margin-left: 20px;
+  width: 20%;
+  border-right: 1.6px solid var(--cor--cinza-escuro);
+}
+
+.boxBodyLeft label {
+  display: flex;
+  gap: 5px;
+}
+
+.boxBodyLeft span {
+  display: flex;
+  border: none;
+  gap: 5px;
+  align-items: center;
+  background-color: transparent;
+  color: var(--cor--gelo);
+  cursor: pointer;
+}
+
+.selectCategories {
+  font-family: var(--font);
+  font-weight: 100;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.selectAllOrNot {
+  margin-bottom: 10px;
+
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.selectAllOrNot span:hover {
+  color: var(--cor--gelo) !important;
+  font-weight: 600;
+}
+
+.selectAllText.checked {
+  color: var(--cor--gelo) !important;
+}
+
+.categoryTitle {
+  background-color: transparent;
+  border: none;
+  font-family: var(--font);
+  color: var(--cor--gelo);
+  font-size: 1.8rem;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.categoryCheckbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.boxBodyLeft label:has(input:checked) h1 {
+  color: var(--cor--verde);
+}
+
+.boxBodyLeft label:has(input:checked) span {
+  color: var(--cor--roxo);
+}
+
+.boxBodyLeft label:hover h1 {
+  font-weight: 400;
+}
+
+.boxBodyLeft label:hover span {
+  color: var(--cor--roxo-claro);
+}
+
+.categoryItem {
+  padding-left: calc(var(--level) * 8px);
+}
+
+.boxBodyRight {
+  width: 100%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.postCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-left: 40px;
+  width: 300px;
+
+  cursor: pointer;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 140px;
+
+  padding: 20px;
+  border-radius: 15px 15px 0 0;
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.3s ease;
+  font-family: var(--font);
+  text-align: center;
+  color: var(--cor--gelo);
+}
+
+.titleText {
+  font-family: var(--font);
+  font-size: 2rem;
+}
+
+.categoryText {
+  font-family: var(--font);
+  font-size: 1.3rem;
+}
+
+.readMoreText {
+  font-family: var(--font);
+  font-size: 1.5rem;
+}
+
+.readMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 38px;
+  border-radius: 0 0 15px 15px;
+
+  background-color: var(--cor--verde-claro);
+  color: var(--cor--cinza-escuro);
+}
+
+.postCard:hover .cardInfo {
+  filter: brightness(0.7);
+  color: var(--cor--gelo);
+}
+
+.postCard:hover .readMore {
+  background-color: var(--cor--verde-escuro);
+  color: var(--cor--verde-claro);
+}
+
+.textFound {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 1.5rem;
+  font-weight: 100;
+  color: var(--cor--gelo);
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-10%);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 4px 10px;
+  background-color: var(--cor--gelo);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--cor--cinza-escuro);
+}
+
+.pagination button:focus {
+  background-color: var(--cor--verde-escuro);
+  color: var(--cor--verde-claro);
+}
+
+.pagination button:hover {
+  background-color: var(--cor--verde-escuro);
+  color: var(--cor--verde-claro);
+}
+
+@media (max-width: 600px) {
+  .main {
+    width: 100%;
+  }
+
+  .pageTitle {
+    font-size: 3.5rem;
+  }
+
+  .boxBody {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .boxBodyLeft {
+    margin: 0 auto;
+    border-right: none;
+    width: 85%;
+    padding-bottom: 10px;
+  }
+
+  .selectCategories {
+    text-align: center;
+  }
+  .selectAllOrNot {
+    text-align: center;
+  }
+
+  .boxBodyRight {
+    margin: 10px 0 0 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .postCard {
+    margin: 0 auto;
+    width: 300px;
+  }
+
+  .cardInfo {
+    height: 140px;
+  }
+
+  .titleText {
+    font-family: var(--font);
+    font-size: 2rem;
+  }
+
+  .categoryText {
+    font-family: var(--font);
+    font-size: 1.3rem;
+  }
+
+  .readMore {
+    height: 33px;
+  }
+
+  .textFound {
+    width: 0;
+    color: transparent;
+  }
+}

@@ -1,0 +1,275 @@
+:root {
+  --cor--gelo: #efefef;
+
+  --cor--cinza-claro: #a5a5a5;
+  --cor--cinza: #2a2a2a;
+  --cor--cinza-escuro: #121212;
+
+  --cor--verde-claro: #b2f599;
+  --cor--verde: #78e45d;
+  --cor--verde-escuro: #4a9f38;
+
+  --cor--roxo-claro: #d966ff;
+  --cor--roxo: #7b0097;
+  --cor--roxo-escuro: #4d0061;
+
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.searchTab {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 60px 0 40px 0;
+}
+
+.searchContent {
+  border: 2px solid var(--cor--cinza-claro);
+  border-radius: 3px;
+  max-width: 40rem;
+  padding: 10px;
+}
+
+.searchContent:focus-within {
+  border-color: var(--cor--verde);
+}
+
+.searchContent:focus-within .fa-search {
+  color: var(--cor--roxo-claro);
+}
+
+.searchBar {
+  background-color: transparent;
+  color: var(--cor--gelo);
+  border: none;
+  outline: none;
+  font-size: 2rem;
+}
+
+.searchBar::placeholder {
+  color: var(--cor--cinza-claro);
+  font-size: 2rem;
+}
+.searchBtn {
+  all: unset;
+  cursor: pointer;
+}
+
+.faSearch {
+  background-color: transparent;
+  border: none;
+  color: var(--cor--verde);
+  font-size: 2rem;
+  margin-left: 10px; /* Ajuste opcional para alinhamento */
+}
+
+.pageTitle {
+  font-family: var(--font);
+  font-size: 5rem;
+  font-weight: 100;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; /* Adiciona um espaçamento interno para evitar que os cards encostem nas bordas */
+  box-sizing: border-box;
+}
+
+.postCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-left: 40px;
+  width: 300px;
+
+  cursor: pointer;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 140px;
+
+  padding: 20px;
+  border-radius: 15px 15px 0 0;
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.3s ease;
+  font-family: var(--font);
+  text-align: center;
+  color: var(--cor--gelo);
+}
+
+.titleText {
+  font-family: var(--font);
+  font-size: 2rem;
+}
+
+.categoryText {
+  font-family: var(--font);
+  font-size: 1.3rem;
+}
+
+.readMoreText {
+  font-family: var(--font);
+  font-size: 1.5rem;
+}
+
+.readMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 38px;
+  border-radius: 0 0 15px 15px;
+
+  background-color: var(--cor--verde-claro);
+  color: var(--cor--cinza-escuro);
+}
+
+.postCard:hover .cardInfo {
+  filter: brightness(0.7);
+  color: var(--cor--gelo);
+}
+
+.postCard:hover .readMore {
+  background-color: var(--cor--verde-escuro);
+  color: var(--cor--verde-claro);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 4px 10px;
+  background-color: var(--cor--gelo);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--cor--cinza-escuro);
+}
+
+.pagination button:focus {
+  background-color: var(--cor--verde-escuro);
+  color: var(--cor--verde-claro);
+}
+
+.pagination button:hover {
+  background-color: var(--cor--verde-escuro);
+  color: var(--cor--verde-claro);
+}
+
+@media (max-width: 600px) {
+  .searchTab {
+    margin: 40px 0 20px 0;
+  }
+
+  .searchBar {
+    font-size: 1.8rem;
+  }
+
+  .searchBar::placeholder {
+    color: var(--cor--cinza-claro);
+    font-size: 1.8rem;
+  }
+
+  .pageTitle {
+    margin-top: 20px;
+    font-size: 3.5rem;
+    font-weight: 100;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: center;
+    gap: 20px;
+  }
+
+  .postCard {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+    width: 300px;
+  }
+
+  .titleText {
+    font-family: var(--font);
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+
+  .categoryText {
+    font-family: var(--font);
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .readMoreText {
+    font-family: var(--font);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .pagination button {
+    margin: 0 5px;
+    padding: 4px 10px;
+    background-color: var(--cor--gelo);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--cor--cinza-escuro);
+  }
+
+  .pagination button:focus {
+    background-color: var(--cor--verde-escuro);
+    color: var(--cor--verde-claro);
+  }
+
+  .pagination button:hover {
+    background-color: var(--cor--verde-escuro);
+    color: var(--cor--verde-claro);
+  }
+}
