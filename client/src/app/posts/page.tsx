@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Post, Category } from "../utils/api";
 
-export default function Posts() {
+function PostsContent() {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -199,5 +199,13 @@ export default function Posts() {
         ))}
       </div>
     </main>
+  );
+}
+
+export default function Posts() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <PostsContent />
+    </Suspense>
   );
 }
