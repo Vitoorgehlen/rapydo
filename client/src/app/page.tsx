@@ -18,7 +18,7 @@ export default function Home() {
   // Busca as categorias
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:8000/categories");
+      const response = await fetch("https://rapydo.onrender.com/categories");
       if (!response.ok) {
         throw new Error("Erro ao buscar categorias");
       }
@@ -33,7 +33,7 @@ export default function Home() {
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/posts");
+      const response = await fetch("https://rapydo.onrender.com/posts");
       if (!response.ok) {
         throw new Error("Erro ao buscar posts");
       }

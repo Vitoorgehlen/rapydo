@@ -126,7 +126,7 @@ export const extractCategories = (categories: Category[], prefix = ""): { id: nu
 };
 
 export async function getTags(): Promise<Tag[]> {
-  const res = await fetch("http://localhost:8000/tags");
+  const res = await fetch("https://rapydo.onrender.com/tags");
   if (!res.ok) {
     throw new Error("Erro ao buscar tags");
   }

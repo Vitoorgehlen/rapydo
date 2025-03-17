@@ -21,7 +21,7 @@ const CategoryTree = () => {
   const [parentId, setParentId] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/categories")
+    fetch("https://rapydo.onrender.com/categories")
       .then((res) => res.json())
       .then((data) => {
         console.log("Dados recebidos:", data);
@@ -51,7 +51,7 @@ const CategoryTree = () => {
     }
     formData.append("image", newCategoryImage);
 
-    const response = await fetch("http://localhost:8000/categories/", {
+    const response = await fetch("https://rapydo.onrender.com/categories/", {
       method: "POST",
       body: formData,
     });
@@ -77,7 +77,7 @@ const CategoryTree = () => {
 
   const removeCategory = async (id: number) => {
     if (!confirm("Tem certeza que deseja remover essa categoria?")) return;
-    const response = await fetch(`http://localhost:8000/categories/${id}`, { method: "DELETE" });
+    const response = await fetch(`https://rapydo.onrender.com/categories/${id}`, { method: "DELETE" });
     if (response.ok) {
       setCategories((prev) => removeCategoryById(prev, id));
     } else {

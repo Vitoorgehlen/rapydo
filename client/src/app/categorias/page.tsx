@@ -14,7 +14,7 @@ const CategoryTree = () => {
   const postsPerPage = 9; 
 
   useEffect(() => {
-    fetch("http://localhost:8000/categories")
+    fetch("https://rapydo.onrender.com/categories")
       .then((res) => res.json())
       .then((data) => {
         console.log("Categorias recebidas:", data);
@@ -26,7 +26,7 @@ const CategoryTree = () => {
   useEffect(() => {
     if (selectedCategories.size > 0) {
       const categoryIds = Array.from(selectedCategories).join("&categories=");
-      fetch(`http://localhost:8000/posts?categories=${categoryIds}`)
+      fetch(`https://rapydo.onrender.com/posts?categories=${categoryIds}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("Posts recebidos:", data);

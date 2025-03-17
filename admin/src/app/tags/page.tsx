@@ -19,7 +19,7 @@ const TagManager = () => {
   const [tagOptions, setTagOptions] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/tags")
+    fetch("https://rapydo.onrender.com/tags")
       .then((res) => res.json())
       .then((data: Tag[]) => setTags(data))
       .catch((err) => console.error("Erro ao buscar as tags:", err));
@@ -38,8 +38,8 @@ const TagManager = () => {
 
     const method = currentTag ? "PUT" : "POST";
     const url = currentTag
-      ? `http://localhost:8000/tags/${currentTag.id}`
-      : "http://localhost:8000/tags";
+      ? `https://rapydo.onrender.com/tags/${currentTag.id}`
+      : "https://rapydo.onrender.com/tags";
 
     const bodyData = {
       name: tagName,
@@ -71,7 +71,7 @@ const TagManager = () => {
 
   const deleteTag = async (id: number) => {
     if (!confirm("Tem certeza que deseja excluir essa tag?")) return;
-    const response = await fetch(`http://localhost:8000/tags/${id}`, {
+    const response = await fetch(`https://rapydo.onrender.com/tags/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {
