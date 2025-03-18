@@ -22,19 +22,12 @@ def get_categories_tree(db: Session = Depends(get_db)):
 async def create_category(
     name: str = Form(...),
     parent_id: str = Form(""),
-    image: UploadFile = File(...),
+    image: str = Form(...),
     db: Session = Depends(get_db)
 ):
     parent_id_int = int(parent_id) if parent_id.strip() != "" else None
 
-    frontend_image_dir = "../blog-next/public/img"
-    os.makedirs(frontend_image_dir, exist_ok=True)
-
-    image_filename = f"{frontend_image_dir}/{image.filename}"
-    with open(image_filename, "wb") as image_file:
-        image_file.write(await image.read())
-
-    image_url = f"/img/{image.filename}"
+    image_url = f"/img/{image}"
 
     category_data = CategoryCreate(name=name, parent_id=parent_id_int, image_url=image_url)
     new_category = crud.create_category(db, category_data, image_url)

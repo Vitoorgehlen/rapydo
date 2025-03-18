@@ -1,6 +1,7 @@
 export interface Category {
   id: number;
   name: string;
+  imageUrl: string | null;
   subcategories?: Category[];
 }
 
@@ -9,6 +10,11 @@ export interface PostData {
   content: string;
   category_id: number | null;
   tag_option_ids: number[];
+}
+
+export interface CategoryOption {
+  id: number;
+  name: string;
 }
 
 export interface TagOption {
@@ -23,18 +29,19 @@ export interface Tag {
   options: TagOption[];
 }
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL 
+const serverToken = process.env.NEXT_PUBLIC_AUTH_TOKEN
+
+
 export async function createPost(postData: PostData) {
-  console.log("Enviando requisição para API...");
-  
-  const response = await fetch("http://127.0.0.1:8000/posts", {
+  const response = await fetch(`${serverUrl}/posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${serverToken}`
     },
     body: JSON.stringify(postData),
   });
-
-  console.log("Resposta recebida:", response.status);
 
   if (!response.ok) {
     const errorText = await response.text();
@@ -46,7 +53,7 @@ export async function createPost(postData: PostData) {
 }
 
 export const getPosts = async () => {
-  const response = await fetch("http://127.0.0.1:8000/posts");
+  const response = await fetch(`${serverUrl}/posts`);
 
   if (!response.ok) {
     throw new Error("Erro ao buscar posts");
@@ -56,7 +63,7 @@ export const getPosts = async () => {
 };
 
 export const getPostById = async (id: string) => {
-  const response = await fetch(`http://127.0.0.1:8000/posts/${id}`);
+  const response = await fetch(`${serverUrl}/posts/${id}`);
 
   if (!response.ok) {
     throw new Error("Erro ao buscar post");
@@ -67,10 +74,11 @@ export const getPostById = async (id: string) => {
 
 export async function updatePost(postId: number, updatedData: Partial<PostData>) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/posts/${postId}`, {
+    const response = await fetch(`${serverUrl}/posts/${postId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${serverToken}`
       },
       body: JSON.stringify(updatedData),
     });
@@ -88,8 +96,11 @@ export async function updatePost(postId: number, updatedData: Partial<PostData>)
 }
 
 export async function deletePost(id: string) {
-  const response = await fetch(`http://127.0.0.1:8000/posts/${id}`, {
+  const response = await fetch(`${serverUrl}/posts/${id}`, {
     method: "DELETE",
+    headers:{
+      "Authorization": `Bearer ${serverToken}`
+    }
   });
 
   if (!response.ok) {
@@ -100,7 +111,7 @@ export async function deletePost(id: string) {
 }
 
 export const getCategories = async (): Promise<Category[]> => {
-  const response = await fetch("http://127.0.0.1:8000/categories");
+  const response = await fetch(`${serverUrl}/categories`);
 
   if (!response.ok) {
     throw new Error("Erro ao buscar categorias");
@@ -126,7 +137,7 @@ export const extractCategories = (categories: Category[], prefix = ""): { id: nu
 };
 
 export async function getTags(): Promise<Tag[]> {
-  const res = await fetch("https://rapydo.onrender.com/tags");
+  const res = await fetch(`${serverUrl}/tags`);
   if (!res.ok) {
     throw new Error("Erro ao buscar tags");
   }

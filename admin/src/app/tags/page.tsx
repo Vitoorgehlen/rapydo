@@ -10,6 +10,10 @@ interface Tag {
   options: string[];
 }
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL 
+const serverToken = process.env.NEXT_PUBLIC_AUTH_TOKEN
+
+
 const TagManager = () => {
   const [tags, setTags] = useState<Tag[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -19,7 +23,7 @@ const TagManager = () => {
   const [tagOptions, setTagOptions] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("https://rapydo.onrender.com/tags")
+    fetch(`${serverUrl}/tags`)
       .then((res) => res.json())
       .then((data: Tag[]) => setTags(data))
       .catch((err) => console.error("Erro ao buscar as tags:", err));
@@ -36,10 +40,15 @@ const TagManager = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!serverToken) {
+      console.error("Token de autenticação não encontrado.");
+      return;
+    }
+
     const method = currentTag ? "PUT" : "POST";
     const url = currentTag
-      ? `https://rapydo.onrender.com/tags/${currentTag.id}`
-      : "https://rapydo.onrender.com/tags";
+      ? `${serverUrl}/tags/${currentTag.id}`
+      : `${serverUrl}/tags`;
 
     const bodyData = {
       name: tagName,
@@ -49,7 +58,10 @@ const TagManager = () => {
 
     const response = await fetch(url, {
       method,
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${serverToken}`
+      },
       body: JSON.stringify(bodyData),
     });
 
@@ -71,8 +83,17 @@ const TagManager = () => {
 
   const deleteTag = async (id: number) => {
     if (!confirm("Tem certeza que deseja excluir essa tag?")) return;
-    const response = await fetch(`https://rapydo.onrender.com/tags/${id}`, {
+
+    if (!serverToken) {
+      console.error("Token de autenticação não encontrado.");
+      return;
+    }
+
+    const response = await fetch(`${serverUrl}/tags/${id}`, {
       method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${serverToken}`
+      },
     });
     if (response.ok) {
       setTags((prev) => prev.filter((tag) => tag.id !== id));

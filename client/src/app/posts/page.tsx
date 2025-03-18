@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Post, Category } from "../utils/api";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+
 function PostsContent() {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -23,7 +25,7 @@ function PostsContent() {
   // Busca as categorias (executada uma vez)
   const fetchCategories = async () => {
     try {
-      const response = await fetch("https://rapydo.onrender.com/categories");
+      const response = await fetch(`${serverUrl}/categories`);
       if (!response.ok) {
         throw new Error("Erro ao buscar categorias");
       }
@@ -38,7 +40,7 @@ function PostsContent() {
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://rapydo.onrender.com/posts");
+      const response = await fetch(`${serverUrl}/posts`);
       if (!response.ok) {
         throw new Error("Erro ao buscar posts");
       }

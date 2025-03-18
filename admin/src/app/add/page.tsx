@@ -3,26 +3,9 @@
 import styles from './page.module.css';
 import { useEffect, useState } from "react";
 import { createPost, getCategories, getTags, extractCategories } from "@/app/utils/api";
-import { Category } from "@/app/utils/api"; // Importa a interface exportada
+import { Category, CategoryOption, Tag } from "@/app/utils/api"; // Importa a interface exportada
 import LexicalEditor from "../components/LexicalEditor";
 import Link from 'next/link';
-
-interface CategoryOption {
-  id: number;
-  name: string;
-}
-
-interface TagOption {
-  id: number;
-  name: string;
-}
-
-interface Tag {
-  id: number;
-  name: string;
-  is_mandatory: boolean;
-  options: TagOption[];
-}
 
 export default function AddPost() {
   const [title, setTitle] = useState("");

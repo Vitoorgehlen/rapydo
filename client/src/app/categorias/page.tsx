@@ -5,6 +5,8 @@ import styles from './page.module.css';
 import Link from "next/link";
 import { Post, Category } from "../utils/api";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+
 const CategoryTree = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -14,7 +16,7 @@ const CategoryTree = () => {
   const postsPerPage = 9; 
 
   useEffect(() => {
-    fetch("https://rapydo.onrender.com/categories")
+    fetch(`${serverUrl}/categories`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Categorias recebidas:", data);
@@ -26,7 +28,7 @@ const CategoryTree = () => {
   useEffect(() => {
     if (selectedCategories.size > 0) {
       const categoryIds = Array.from(selectedCategories).join("&categories=");
-      fetch(`https://rapydo.onrender.com/posts?categories=${categoryIds}`)
+      fetch(`${serverUrl}/posts?categories=${categoryIds}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("Posts recebidos:", data);

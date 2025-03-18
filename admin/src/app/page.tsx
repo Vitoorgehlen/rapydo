@@ -44,7 +44,7 @@ export default function Home() {
       } catch (error) {
         console.error("Erro ao excluir post:", error);
       } finally {
-        setPostToDelete(null); // Fecha o modal
+        setPostToDelete(null); 
       }
     }
   };

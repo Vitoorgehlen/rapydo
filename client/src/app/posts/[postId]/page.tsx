@@ -7,6 +7,8 @@ import LexicalEditor from "../../components/LexicalEditor";
 import styles from "./page.module.css";
 import Image from "next/image";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+
 export default function ViewPost() {
   const params = useParams();
   const postId = params?.postId as string;
@@ -20,7 +22,7 @@ export default function ViewPost() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("https://rapydo.onrender.com/categories");
+      const response = await fetch(`${serverUrl}/categories`);
       if (!response.ok) {
         throw new Error("Erro ao buscar categorias");
       }

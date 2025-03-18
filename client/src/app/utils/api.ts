@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export interface TagOption {
   id: number;
   name: string;
@@ -21,24 +19,11 @@ export interface Category {
   subcategories: Category[];
 }
 
-const api = axios.create({
-    baseURL: "http://127.0.0.1:8000" 
-});
-
-export const getPosts = async () => {
-    try {
-        const response = await api.get("/posts"); 
-        console.log("Dados recebidos:", response.data); 
-        return response.data;
-    } catch (error) {
-        console.error("Erro ao buscar posts:", error);
-        return [];
-    }
-};
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
 
 export async function getPostById(postId: string): Promise<Post | null> {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/posts/${postId}`);
+    const response = await fetch(`${serverUrl}/posts/${postId}`);
     if (!response.ok) throw new Error(`Erro ${response.status}`);
     return await response.json();
   } catch (error) {

@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { Post, Category } from "../app/utils/api";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -18,7 +20,7 @@ export default function Home() {
   // Busca as categorias
   const fetchCategories = async () => {
     try {
-      const response = await fetch("https://rapydo.onrender.com/categories");
+      const response = await fetch(`${serverUrl}/categories`);
       if (!response.ok) {
         throw new Error("Erro ao buscar categorias");
       }
@@ -33,7 +35,7 @@ export default function Home() {
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://rapydo.onrender.com/posts");
+      const response = await fetch(`${serverUrl}/posts`);
       if (!response.ok) {
         throw new Error("Erro ao buscar posts");
       }

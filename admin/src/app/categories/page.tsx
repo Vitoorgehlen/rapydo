@@ -12,16 +12,20 @@ type Category = {
   subcategories: Category[];
 };
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL 
+const serverToken = process.env.NEXT_PUBLIC_AUTH_TOKEN
+
+
 const CategoryTree = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [openCategories, setOpenCategories] = useState<{ [key: number]: boolean }>({});
   const [showModal, setShowModal] = useState(false); // Controlar a visibilidade do modal
   const [newCategoryName, setNewCategoryName] = useState("");
-  const [newCategoryImage, setNewCategoryImage] = useState<File | null>(null);
+  const [newCategoryImage, setNewCategoryImage] = useState("");
   const [parentId, setParentId] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch("https://rapydo.onrender.com/categories")
+    fetch(`${serverUrl}/categories`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Dados recebidos:", data);
@@ -35,14 +39,19 @@ const CategoryTree = () => {
   };
 
   const addCategory = (parentId: number | null) => {
-    setParentId(parentId);  // Definir o ID do pai da nova categoria
-    setShowModal(true); // Exibir o modal
+    setParentId(parentId);  
+    setShowModal(true); 
   };
 
   const handleCategorySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!newCategoryName || !newCategoryImage) return;
+
+    if (!serverToken) {
+      console.error("Token de autenticação não encontrado.");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("name", newCategoryName);
@@ -51,15 +60,18 @@ const CategoryTree = () => {
     }
     formData.append("image", newCategoryImage);
 
-    const response = await fetch("https://rapydo.onrender.com/categories/", {
+    const response = await fetch(`${serverUrl}/categories/`, {
       method: "POST",
+      headers: {
+        "Authorization": `Bearer ${serverToken}`
+      },
       body: formData,
     });
 
     if (response.ok) {
       const newCategory = await response.json();
       setCategories((prev) => addSubcategory(prev, parentId, newCategory));
-      setShowModal(false);  // Fechar o modal
+      setShowModal(false);
     } else {
       const errorText = await response.text();
       console.error("Erro ao adicionar a categoria", errorText);
@@ -77,11 +89,23 @@ const CategoryTree = () => {
 
   const removeCategory = async (id: number) => {
     if (!confirm("Tem certeza que deseja remover essa categoria?")) return;
-    const response = await fetch(`https://rapydo.onrender.com/categories/${id}`, { method: "DELETE" });
+
+      if (!serverToken) {
+        console.error("Token de autenticação não encontrado.");
+        return;
+      }
+    
+    const response = await fetch(`${serverUrl}/categories/${id}`, { 
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${serverToken}`
+      }
+     });
     if (response.ok) {
       setCategories((prev) => removeCategoryById(prev, id));
     } else {
-      console.error("Erro ao remover a categoria");
+      const errorText = await response.text();
+      console.error("Erro ao remover a categoria", errorText);
     }
   };
 
@@ -138,9 +162,8 @@ const CategoryTree = () => {
                 <label>
                   Imagem:
                   <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setNewCategoryImage(e.target.files ? e.target.files[0] : null)}
+                    type="text"
+                    onChange={(e) => setNewCategoryImage(e.target.value)}
                     required
                   />
                 </label>
