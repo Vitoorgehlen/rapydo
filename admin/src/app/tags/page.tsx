@@ -3,11 +3,14 @@
 import { useEffect, useState, FormEvent } from "react";
 import styles from "./page.module.css";
 
+interface Option {
+  name:string;
+}
 interface Tag {
   id: number;
   name: string;
   is_mandatory: boolean;
-  options: string[];
+  options: Option[];
 }
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL 
@@ -30,10 +33,11 @@ const TagManager = () => {
   }, []);
 
   const openModal = (tag: Tag | null = null) => {
+    console.log("Tag recebida:", tag);
     setCurrentTag(tag);
     setTagName(tag ? tag.name : "");
     setIsMandatory(tag ? tag.is_mandatory : false);
-    setTagOptions(tag ? tag.options : []);
+    setTagOptions(tag ? tag.options.map((option) => option.name) : []);
     setShowModal(true);
   };
 
